@@ -1,0 +1,7 @@
+# Ignore artifacts:
+images
+.eslintrc.json
+.github/dependabot.yml
+css/style.css
+package.json
+README.md
