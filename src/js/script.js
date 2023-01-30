@@ -247,7 +247,6 @@
         thisProduct.priceSingle * thisProduct.productSummary.amount;
       thisProduct.productSummary.params =
         thisProduct.prepareCartProductParams();
-      console.log(thisProduct.productSummary);
       return thisProduct.productSummary;
     }
 
@@ -255,7 +254,6 @@
       const thisProduct = this;
       // convert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.dom.form);
-      console.log(formData, 'formData');
       // set price to default price
       // for every category (param)...
       const params = {};
@@ -274,9 +272,6 @@
           const option = param.options[optionId];
           const optionSelected =
             formData[paramId] && formData[paramId].includes(optionId);
-          console.log(option, 'option');
-          console.log(optionId, 'optionID');
-
           // check if there is param with a name of paramId in formData and if it includes optionId
           if (optionSelected) {
             // check if the option is not default
@@ -284,7 +279,6 @@
           }
         }
       }
-      console.log('params', params);
       return params;
     }
   }
@@ -358,7 +352,6 @@
       thisCart.products = [];
       thisCart.getElements(element);
       thisCart.initActions();
-      console.log('new Cart', thisCart);
     }
     getElements(element) {
       const thisCart = this;
@@ -368,7 +361,6 @@
         select.cart.toggleTrigger
       );
       thisCart.dom.productList = element.querySelector(select.cart.productList);
-      console.log(thisCart.dom.productList)
     }
     initActions() {
       const thisCart = this;
@@ -379,7 +371,6 @@
 
     add(menuProduct) {
       const thisCart = this;
-      console.log('adding product', menuProduct);
       const generatedHTML = templates.cartProduct(menuProduct);
       const generateDOM = utils.createDOMFromHTML(generatedHTML);
       thisCart.dom.productList.appendChild(generateDOM);
