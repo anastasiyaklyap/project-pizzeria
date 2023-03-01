@@ -1,8 +1,48 @@
-import { settings, select } from './settings.js';
+import { settings, select, classNames } from './settings.js';
 import Cart from './components/Cart.js';
 import Product from './components/Product.js';
+import Booking from './components/Booking.js';
 
 const app = {
+  activatePage: function (pageId) {
+    const thisApp = this;
+    for (let page of thisApp.pages) {
+      page.classList.toggle(classNames.pages.active, page.id === pageId);
+    }
+    for (let link of thisApp.navLinks) {
+      link.classList.toggle(
+        classNames.nav.active,
+        link.getAttribute('href') === `#${pageId}`
+      );
+    }
+  },
+
+  initPages: function () {
+    const thisApp = this;
+
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    const idFromHash = window.location.hash.replace('#/', '');
+    let pageMatchingHash = thisApp.pages[0].id;
+    for (let page of thisApp.pages) {
+      if (page.id === idFromHash) {
+        pageMatchingHash = page.id;
+        break;
+      }
+    }
+    thisApp.activatePage(pageMatchingHash);
+
+    for (let link of thisApp.navLinks) {
+      link.addEventListener('click', (e) => {
+        const clickedElement = e.target;
+
+        e.preventDefault();
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(id);
+        window.location.hash = `#/${id}`;
+      });
+    }
+  },
   initMenu: function () {
     const thisApp = this;
     for (let productData in thisApp.data.products) {
@@ -35,10 +75,17 @@ const app = {
       app.cart.add(event.detail.product);
     });
   },
+  initBooking: function () {
+    const thisApp = this;
+    const bookingElem = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingElem);
+  },
   init: function () {
     const thisApp = this;
+    thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 
