@@ -39,7 +39,7 @@ class Cart {
     });
     thisCart.dom.form.addEventListener('submit', (e) => {
       e.preventDefault();
-      thisCart.sendOrder();
+      thisCart.validateForm() && thisCart.sendOrder();
     });
   }
 
@@ -86,6 +86,37 @@ class Cart {
     productToRemove.dom.wrapper.remove();
     thisCart.update();
   }
+
+  validateForm() {
+    const thisCart = this;
+    let formValid = false;
+    let phoneValid = false;
+    let addressValid = false;
+    let productList = false;
+    if (thisCart.products.length) {
+      productList = true;
+    } else {
+      alert('There is no product in the list');
+    }
+    if (/^\d{9}$/.test(thisCart.dom.phone.value)) {
+      phoneValid = true;
+    } else {
+      alert(
+        `Phone number "${thisCart.dom.phone.value}" is incorrect. Enter number with 9 digits.`
+      );
+    }
+    if (thisCart.dom.address.value) {
+      addressValid = true;
+    } else {
+      alert('You forgot to enter your address.');
+    }
+
+    if (phoneValid && addressValid && productList) {
+      formValid = true;
+    }
+    return formValid;
+  }
+
   sendOrder() {
     const thisCart = this;
     const url = settings.db.url + '/' + settings.db.orders;
@@ -108,14 +139,19 @@ class Cart {
       },
       body: JSON.stringify(payload),
     };
-
-    fetch(url, options).then((response) => {
-      if (response.ok) {
-        alert(
-          `You've ordered ${thisCart.totalNumber} product(s). Total price is ${thisCart.totalPrice}`
-        );
+    const fetchData = async (url, options) => {
+      try {
+        const response = await fetch(url, options);
+        if (response.ok) {
+          alert(
+            `You've ordered ${thisCart.totalNumber} product(s). Total price is ${thisCart.totalPrice}`
+          );
+        }
+      } catch (error) {
+        console.error(error);
       }
-    });
+    };
+    fetchData(url, options);
   }
 }
 

@@ -37,7 +37,8 @@ $base-size: 12px;
   text-align: center;
 
   &:hover {
-    background: lighten($btn-bg, 3%);
+    background: lighten($btn-bg, 10%);
+    cursor: pointer;
   }
 
   // CODE ADDED START
