@@ -109,7 +109,13 @@ class Cart {
       body: JSON.stringify(payload),
     };
 
-    fetch(url, options);
+    fetch(url, options).then((response) => {
+      if (response.ok) {
+        alert(
+          `You've ordered ${thisCart.totalNumber} product(s). Total price is ${thisCart.totalPrice}`
+        );
+      }
+    });
   }
 }
 
