@@ -32,9 +32,7 @@ class CartProduct {
       select.CartProduct.remove
     );
     thisCartProduct.dom.amountWidgetValue =
-      thisCartProduct.dom.wrapper.querySelector(
-        select.CartProduct.amountWidgetValue
-      );
+      thisCartProduct.dom.wrapper.querySelector(select.CartProduct.input).value;
   }
 
   initAmountWidget() {
