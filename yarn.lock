@@ -2181,7 +2181,7 @@ json-schema-traverse@^1.0.0:
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz#ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
   integrity sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
 
-json-server@^0.17.2:
+json-server@0.17.2:
   version "0.17.2"
   resolved "https://registry.yarnpkg.com/json-server/-/json-server-0.17.2.tgz#df89444314c6bee85e684fc8fc22a761545b53bd"
   integrity sha512-PKmTFfiUduibc9QyieY9PDiSG4CttFpqpVkwTvWWbGQaah4Id/gKqn5er4dnynUw4GVdjAzGKjSbBuVIlXM6mw==
