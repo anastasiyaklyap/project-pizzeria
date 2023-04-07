@@ -43,7 +43,7 @@
         "postcss-cli": "10.1.0",
         "postcss-scss": "4.0.6",
         "rimraf": "4.3.0",
-        "sass": "1.58.3",
+        "sass": "1.61.0",
         "stylelint": "14.16.1",
         "stylelint-config-standard-scss": "6.1.0",
         "stylelint-scss": "4.4.0"
