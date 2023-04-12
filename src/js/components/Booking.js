@@ -93,7 +93,7 @@ class Booking {
   }
 
   makeBooked(date, hour, duration, table) {
-    if (typeof this.booked.get(date) == 'undefined') {
+    if (!(date in this.booked)) {
       this.booked.set(date, new Map());
     }
     const startHour = utils.hourToNumber(hour);
@@ -103,7 +103,7 @@ class Booking {
       hourBlock < startHour + duration;
       hourBlock += 0.5
     ) {
-      if (typeof this.booked.get(date).get(hourBlock) == 'undefined') {
+      if (!(hourBlock in this.booked.get(date))) {
         this.booked.get(date).set(hourBlock, []);
       }
       this.booked.get(date).get(hourBlock).push(table);
@@ -175,23 +175,24 @@ class Booking {
     const tableId = element.target.getAttribute(
       settings.booking.tableIdAttribute
     );
-    if (tableId) {
-      if (element.target.classList.contains(classNames.booking.tableBooked)) {
-        alert(`Table no ${tableId} is already booked`);
-      } else {
-        for (let table of this.dom.get('tables')) {
-          if (table.classList.contains(classNames.booking.tableSelected)) {
-            table.classList.remove(classNames.booking.tableSelected);
-          } else {
-            table.classList.toggle(
-              classNames.booking.tableSelected,
-              table.getAttribute(settings.booking.tableIdAttribute) == tableId
-            );
-          }
+    if (!tableId) {
+      return;
+    }
+    if (element.target.classList.contains(classNames.booking.tableBooked)) {
+      alert(`Table no ${tableId} is already booked`);
+    } else {
+      for (let table of this.dom.get('tables')) {
+        if (table.classList.contains(classNames.booking.tableSelected)) {
+          table.classList.remove(classNames.booking.tableSelected);
+        } else {
+          table.classList.toggle(
+            classNames.booking.tableSelected,
+            table.getAttribute(settings.booking.tableIdAttribute) == tableId
+          );
         }
-
-        this.bookedTable = tableId;
       }
+
+      this.bookedTable = tableId;
     }
   }
 
@@ -232,13 +233,6 @@ class Booking {
       starter.checked && payload.starters.push(starter.value);
     }
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    };
     const fetchData = async (url, options) => {
       try {
         const response = await fetch(url, options);
@@ -254,7 +248,13 @@ class Booking {
         console.error(error);
       }
     };
-    fetchData(url, options);
+    fetchData(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
   }
 }
 

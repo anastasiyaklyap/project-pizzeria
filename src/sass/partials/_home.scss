@@ -1,0 +1,128 @@
+.home-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+.home_page_box {
+  @include flex(row, center, space-around);
+
+  &_cta {
+    width: 100%;
+    min-height: 110px;
+
+    &:first-of-type {
+      background-image: url(../../images/main/pizza-1.jpg);
+      margin-right: 4px;
+    }
+
+    &:last-of-type {
+      background-image: url(../../images/main/pizza-2.jpg);
+      margin-left: 4px;
+    }
+
+    a {
+      @include flex(row, center, space-around);
+
+      text-align: center;
+      text-decoration: none;
+      color: $color-light;
+      min-height: 110px;
+      width: 100%;
+
+      h2 {
+        margin: 0;
+        transition: margin 1s;
+      }
+
+      &:hover {
+        h2 {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  &_details {
+    background-color: $color-main;
+    color: $color-light;
+    text-align: center;
+    padding: 10px 0;
+    margin: 4px 0;
+    margin-bottom: 40px;
+  }
+
+  p {
+    display: none;
+  }
+}
+
+.carousel {
+  margin-bottom: 70px;
+
+  .carousel-cell {
+    @include flex(row, center, space-around);
+
+    > * {
+      width: 50%;
+      padding: 0 15px;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .flickity-prev-next-button.previous,
+  .flickity-prev-next-button.next {
+    display: none;
+  }
+}
+
+.media {
+  margin-bottom: 70px;
+
+  .gallery {
+    @include flex(row, center, space-around);
+    flex-wrap: wrap;
+
+    .image {
+      width: 33%;
+      height: 200px;
+      padding: 5px;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      i {
+        visibility: hidden;
+        color: black;
+        font-size: 40px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        transition: color 1s;
+        cursor: pointer;
+      }
+
+      &:hover {
+        i {
+          visibility: visible;
+          color: red;
+        }
+      }
+    }
+  }
+
+  p a {
+    color: $color-main;
+  }
+}

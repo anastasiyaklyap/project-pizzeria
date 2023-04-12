@@ -9,6 +9,7 @@ export const select = {
     cart: '#cart',
     pages: '#pages',
     booking: '.booking-wrapper',
+    home: '#home',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -51,6 +52,7 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+    homeLinks: '.home_page_box_cta a',
   },
   cart: {
     productList: '.cart__order-summary',
@@ -71,6 +73,9 @@ export const select = {
     price: '.cart__product-price',
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
+  },
+  Gallery: {
+    carousel: '.carousel',
   },
 };
 
